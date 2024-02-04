@@ -1,4 +1,5 @@
 from src.api_connector import HeadHunterAPIConnector
+from utils import search_vacancies, sort_vacancies
 
 
 def user_interaction():
@@ -10,7 +11,7 @@ def user_interaction():
     search_query = input("Введите поисковый запрос: ")
     hh_api = HeadHunterAPIConnector(search_query)
     hh_vacancies = hh_api.get_vacancies()
-
+    search_vacancies(search_query)
     top_n = int(input("Введите количество вакансий для вывода в топ N: "))
     filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
     filtered_vacancies = filter_vacancies(hh_vacancies, filter_words)

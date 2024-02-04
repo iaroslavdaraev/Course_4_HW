@@ -28,7 +28,7 @@ class APIConnector(ABC):
 
 
 class HeadHunterAPIConnector(APIConnector):
-    def __init__(self, search_text: str, area: int):
+    def __init__(self, search_text: str):
         """
         Инициализация полей API
         :param search_text:
@@ -39,7 +39,6 @@ class HeadHunterAPIConnector(APIConnector):
             'per_page': 100,
             'text': search_text,
             'search_field': 'name',
-            'area': area,
             'only_with_salary': True
         }
 

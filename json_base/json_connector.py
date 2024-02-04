@@ -80,17 +80,17 @@ class JSONConnector(Connector):
         with open(self.path, 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
 
-    def get_vacancy_keywords(self, keywords: list[dict]) -> list[dict]:
+    def get_vacancy_keywords(self, filter_words: list[dict]) -> list[dict]:
         """
         Получение данных по ключевым словам из файла JSON
-        :param keywords: Ключевые слова
+        :param filter_words: Ключевые слова
         :return: Список
         """
         data = self.read()
         matching_vacancies = [vacancy for vacancy in data if all(keyword in vacancy['vacancy_name']
                                                                  or (vacancy['requirement']
                                                                      and keyword in vacancy['requirement']) for keyword
-                                                                 in keywords)]
+                                                                 in filter_words)]
 
         return matching_vacancies
 
