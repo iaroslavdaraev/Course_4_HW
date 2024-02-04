@@ -101,6 +101,6 @@ class JSONConnector(Connector):
         :return: Список
         """
         data = self.read()
-        delete_data = [vacancy for vacancy in data if not all(
+        new_data = [vacancy for vacancy in data if not all(
             keyword in vacancy['name_vacancy'] or keyword in vacancy['requirement'] for keyword in keywords_delete)]
-        self.write(delete_data)
+        self.write(new_data)
