@@ -1,3 +1,6 @@
+import re
+
+
 class Vacancy:
     """
     Класс вакансии
@@ -15,7 +18,9 @@ class Vacancy:
         self.__vacancy_name = vacancy_name
         self.__salary = 0 if salary is None else int(salary)
         self.__url = url
-        self.__requirement = requirement
+
+        clean_string = re.sub(r'<.*?.', '', str(requirement))
+        self.__requirement = clean_string.replace('\n', ' ')
 
     def __gt__(self, other) -> bool:
         return self.__salary > other.__salary
