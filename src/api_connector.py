@@ -32,7 +32,6 @@ class HeadHunterAPIConnector(APIConnector):
         """
         Инициализация полей API
         :param search_text: Ключевые слова
-        :param area:
         """
         self.__search_text = search_text
 
@@ -43,7 +42,7 @@ class HeadHunterAPIConnector(APIConnector):
             """
         params = {
             'page': 0,
-            'per_page': 100,
+            'per_page': 5,
             'text': self.__search_text,
             'search_field': 'name',
             'only_with_salary': True

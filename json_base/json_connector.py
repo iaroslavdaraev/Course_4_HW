@@ -33,7 +33,7 @@ class Connector(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_vacancy_keywords(self, keywords: list[dict]) -> list[dict]:
+    def get_vacancy_keywords(self, keywords: list[str]) -> list[dict]:
         """
         Абстрактный метод получения данных по ключевым словам
         :param keywords: Ключевые слова
@@ -42,7 +42,7 @@ class Connector(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, keywords_delete: list[dict]) -> None:
+    def delete(self, keywords_delete: list[str]) -> None:
         """
         Абстрактный метод удаления данных по ключевым словам
         :param keywords_delete: Ключевые слова
@@ -81,21 +81,21 @@ class JSONConnector(Connector):
         with open(self.path, 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
 
-    def get_vacancy_keywords(self, filter_words: list[dict]) -> list[dict]:
+    def get_vacancy_keywords(self, filter_words: list[str]) -> list[dict]:
         """
         Получение данных по ключевым словам из файла JSON
         :param filter_words: Ключевые слова
         :return: Список
         """
         data = self.read()
-        matching_vacancies = [vacancy for vacancy in data if all(keyword in vacancy['vacancy_name']
+        matching_vacancies = [vacancy for vacancy in data if all(keyword in vacancy['name_vacancy']
                                                                  or (vacancy['requirement']
                                                                      and keyword in vacancy['requirement']) for keyword
                                                                  in filter_words)]
 
         return matching_vacancies
 
-    def delete(self, keywords_delete: list[dict]) -> None:
+    def delete(self, keywords_delete: list[str]) -> None:
         """
         Удаление данных по ключевым словам из файла JSON
         :param keywords_delete: Ключевые слова

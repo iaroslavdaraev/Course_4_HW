@@ -26,11 +26,11 @@ def load_to_file(path: str) -> list[Vacancy]:
     :param path: Путь к файлу
     :return: Список вакансий из файла
     """
-    json_file = JSONConnector(PATH_FILE)
+    json_file = JSONConnector(path)
     data = json_file.read()
     list_vacancies = []
     for item in data:
-        list_vacancies.append(Vacancy(item['vacancy_name'], item['salary'], item['url'], item['requirement']))
+        list_vacancies.append(Vacancy(item['name_vacancy'], item['salary'], item['url'], item['requirement']))
     return list_vacancies
 
 
@@ -41,14 +41,14 @@ def write_to_file(path: str, data: list[Vacancy]) -> None:
     :param data: Список вакансий из файла
     :return: None
     """
-    json_file = JSONConnector(PATH_FILE)
+    json_file = JSONConnector(path)
     list_vacancies = []
     for item in data:
         vacancy_dict = {
-            'vacancy_name': item.__vacancy_name,
-            'salary': item.__salary,
-            'url': item.__url,
-            'requirement': item.__requirement
+            'name_vacancy': item.name_vacancy,
+            'salary': item.salary,
+            'url': item.url,
+            'requirement': item.requirement
         }
         list_vacancies.append(vacancy_dict)
 
@@ -65,27 +65,27 @@ def sort_vacancies(data: list[Vacancy], top_n: int) -> list[Vacancy]:
     return sorted(data, reverse=True)[:top_n]
 
 
-def search_keywords(path: str, keywords: list[dict]) -> list[Vacancy]:
+def search_keywords(path: str, keywords: list[str]) -> list[Vacancy]:
     """
     Поиск вакансий по ключевым словам
     :param path: Путь к файлу
     :param keywords: Ключевые слова
     :return: Список вакансий
     """
-    json_file = JSONConnector(PATH_FILE)
+    json_file = JSONConnector(path)
     matching_vacancies = json_file.get_vacancy_keywords(keywords)
     list_vacancies = []
     for item in matching_vacancies:
-        list_vacancies.append(Vacancy(item['vacancy_name'], item['salary'], item['url'], item['requirement']))
+        list_vacancies.append(Vacancy(item['name_vacancy'], item['salary'], item['url'], item['requirement']))
     return list_vacancies
 
 
-def delete_vacancies(path: str, keywords_delete: list[dict]) -> None:
+def delete_vacancies(path: str, keywords_delete: list[str]) -> None:
     """
     Удаление акансий по ключевым словам
     :param path: Путь к файлу
     :param keywords_delete: Ключевые слова
     :return: None
     """
-    json_file = JSONConnector(PATH_FILE)
+    json_file = JSONConnector(path)
     json_file.delete(keywords_delete)
