@@ -42,7 +42,7 @@ class HeadHunterAPIConnector(APIConnector):
             """
         params = {
             'page': 0,
-            'per_page': 5,
+            'per_page': 100,
             'text': self.__search_text,
             'search_field': 'name',
             'only_with_salary': True
