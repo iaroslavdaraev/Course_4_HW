@@ -15,7 +15,8 @@ def search_vacancies(search_query: str) -> list[Vacancy]:
 
     list_vacancies = []
     for item in hh_vacancies:
-        list_vacancies.append(Vacancy(item['name'], item['salary']['from'], item['alternate_url'], item['snippet']['requirement']))
+        list_vacancies.append(
+            Vacancy(item['name'], item['salary']['from'], item['alternate_url'], item['snippet']['requirement']))
     return list_vacancies
 
 

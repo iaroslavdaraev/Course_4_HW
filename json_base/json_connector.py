@@ -55,6 +55,7 @@ class JSONConnector(Connector):
     """
     класс для работы с данными
     """
+
     def __init__(self, path: str) -> None:
         """
         Инициализация
